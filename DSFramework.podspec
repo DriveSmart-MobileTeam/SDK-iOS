@@ -8,7 +8,7 @@ s.summary = "DSFramework is the core of DriveSmart"
 #s.requires_arc = true
 
 # 2
-s.version = "0.0.1"
+s.version = "0.0.2"
 
 # 3
 s.license = { :type => "GNU", :file => "LICENSE" }
@@ -20,8 +20,7 @@ s.author = { "DriveSmart" => "info@drive-smart.com" }
 s.homepage = "https://github.com/DriveSmart-MobileTeam/SDK-iOS.git"
 
 # 6 - Replace this URL with your own Git URL from "Quick Setup"
-s.source = { :git => "https://github.com/DriveSmart-MobileTeam/SDK-iOS.git", :branch => "#{s.version}",
-:tag => "#{s.version}" }
+s.source = { :git => "https://github.com/DriveSmart-MobileTeam/SDK-iOS.git", :branch => "#{s.version}", :tag => "#{s.version}" }
 
 # 7
 #s.framework = "UIKit"
