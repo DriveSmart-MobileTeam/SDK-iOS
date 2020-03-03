@@ -217,7 +217,7 @@ SWIFT_CLASS("_TtC11DSFramework6DRSApp")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, weak) id <DRSAppProtocol> _Nullable delegate;)
 + (id <DRSAppProtocol> _Nullable)delegate SWIFT_WARN_UNUSED_RESULT;
 + (void)setDelegate:(id <DRSAppProtocol> _Nullable)value;
-+ (void)configureWithApkKey:(NSString * _Nonnull)apkKey configurationType:(NSInteger)configurationType completion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
++ (void)configureWithApkKey:(NSString * _Nonnull)apkKey completion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
 + (void)setUserId:(NSString * _Nonnull)userId completion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
 + (void)setCarplate:(NSString * _Nonnull)carPlate completion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
 + (void)getAnonymousUserWithCompletion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
@@ -543,7 +543,7 @@ SWIFT_CLASS("_TtC11DSFramework6DRSApp")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, weak) id <DRSAppProtocol> _Nullable delegate;)
 + (id <DRSAppProtocol> _Nullable)delegate SWIFT_WARN_UNUSED_RESULT;
 + (void)setDelegate:(id <DRSAppProtocol> _Nullable)value;
-+ (void)configureWithApkKey:(NSString * _Nonnull)apkKey configurationType:(NSInteger)configurationType completion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
++ (void)configureWithApkKey:(NSString * _Nonnull)apkKey completion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
 + (void)setUserId:(NSString * _Nonnull)userId completion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
 + (void)setCarplate:(NSString * _Nonnull)carPlate completion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
 + (void)getAnonymousUserWithCompletion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
@@ -869,7 +869,7 @@ SWIFT_CLASS("_TtC11DSFramework6DRSApp")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, weak) id <DRSAppProtocol> _Nullable delegate;)
 + (id <DRSAppProtocol> _Nullable)delegate SWIFT_WARN_UNUSED_RESULT;
 + (void)setDelegate:(id <DRSAppProtocol> _Nullable)value;
-+ (void)configureWithApkKey:(NSString * _Nonnull)apkKey configurationType:(NSInteger)configurationType completion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
++ (void)configureWithApkKey:(NSString * _Nonnull)apkKey completion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
 + (void)setUserId:(NSString * _Nonnull)userId completion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
 + (void)setCarplate:(NSString * _Nonnull)carPlate completion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;
 + (void)getAnonymousUserWithCompletion:(void (^ _Nonnull)(id _Nullable, NSError * _Nullable))completion;

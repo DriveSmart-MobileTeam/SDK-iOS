@@ -8,13 +8,13 @@ s.summary = "DSFramework is the core of DriveSmart"
 #s.requires_arc = true
 
 # 2
-s.version = "0.0.5"
+s.version = "5.0.0"
 
 # 3
 s.license = { :type => "GNU", :file => "LICENSE" }
 
 # 4 - Replace with your name and e-mail address
-s.author = { "DriveSmart" => "info@drive-smart.com" }
+s.author = { "DriveSmart" => "mobileteam@drive-smart.com" }
 
 # 5 - Replace this URL with your own GitHub page's URL (from the address bar)
 s.homepage = "https://github.com/DriveSmart-MobileTeam/SDK-iOS.git"
