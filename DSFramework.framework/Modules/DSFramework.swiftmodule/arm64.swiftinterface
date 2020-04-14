@@ -1,0 +1,143 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)
+// swift-module-flags: -target arm64-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name DSFramework
+import CoreData
+import CoreFoundation
+import CoreLocation
+import CoreMotion
+@_exported import DSFramework
+import Darwin
+import Foundation
+import Swift
+import SystemConfiguration
+import UIKit
+public typealias ResultAlias = (Any?, Foundation.NSError?) -> ()
+@objc public protocol DRSAppProtocol {
+  @objc func startService(result: Any?, error: Foundation.NSError?)
+  @objc func stopService(result: Any?, error: Foundation.NSError?)
+  @objc func restartService(result: Any?, error: Foundation.NSError?)
+  @objc func statusEventService(result: Any?, error: Foundation.NSError?)
+}
+@_inheritsConvenienceInitializers @objc public class DRSApp : ObjectiveC.NSObject {
+  @objc weak public static var delegate: DSFramework.DRSAppProtocol?
+  @objc public static func configure(apkKey: Swift.String, completion: @escaping DSFramework.ResultAlias)
+  @objc public static func setUserId(_ userId: Swift.String, completion: @escaping DSFramework.ResultAlias)
+  @objc public static func setCarplate(_ carPlate: Swift.String, completion: @escaping DSFramework.ResultAlias)
+  @objc public static func getAnonymousUser(completion: @escaping DSFramework.ResultAlias)
+  @objc public static func setModeOnline(_ mode: Swift.Bool, completion: @escaping DSFramework.ResultAlias)
+  @objc public static func getModeOnline() -> Swift.Bool
+  @objc public static func startService()
+  @objc public static func stopService()
+  @objc public static func getBackupAmount(completion: @escaping DSFramework.ResultAlias)
+  @objc public static func checkService() -> DSFramework.DRSCheckStatus
+  @objc public static func forceSendData()
+  @objc public static func tripInfo() -> DSFramework.DRSInfoTrip?
+  @objc public static func pauseService(completion: @escaping DSFramework.ResultAlias)
+  @objc public static func reStartService()
+  @objc public static func isPaused() -> Swift.Bool
+  @objc public static func setMotionStart(enabled: Swift.Bool, completion: @escaping DSFramework.ResultAlias)
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc public enum DRSGPSTypes : Swift.Int {
+  case bad = 3
+  case good = 1
+  case regular = 2
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum DRSResponseErrors : Swift.Int {
+  case DS_UNHANDLED_ERROR
+  case DS_EMPTY_PARAM_ERROR
+  case DS_GPS_PROVIDER_ERROR
+  case DS_LOCATION_PERMISSIONS_ERROR
+  case DS_LOCATION_ERROR
+  case DS_SERVICE_ALREADY_RUNNING_ERROR
+  case DS_EMPTY_UUID_ERROR
+  case DS_ERROR_APK_ENTERPRISE
+  case DS_ERROR_NETWORKING_FAILURE
+  case DS_NOT_SECURITY
+  case DS_ERROR_VALIDATE_APK_ENTERPRISE
+  case DS_EMPTY_CARPLATE_ERROR
+  case DS_SERVICE_NOT_PAUSED
+  case DS_SERVICE_NOT_RUNNING
+  case DS_SERVICE_ALREDY_PAUSED
+  case DS_MOTION_PERMISSION_ERROR
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum DRSResponse : Swift.Int {
+  case RESPONSE_OK
+  case DS_UPLOADING_TRIP
+  case DS_FINISH_UPLOADING_TRIP
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum DRSTripStatus : Swift.Int {
+  case none = 0
+  case test = 1
+  case good = 2
+  case bad = 3
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @objc public class DRSCheckStatus : ObjectiveC.NSObject {
+  @objc public var serviceTime: Foundation.Date
+  @objc public var timer: Swift.Double
+  @objc public var totalDistance: Swift.Double
+  @objc public var conectivity: Swift.Bool
+  @objc public var serviceCreated: Swift.Bool
+  @objc public var tripStatus: DSFramework.DRSTripStatus
+  @objc public var levelGPS: DSFramework.DRSGPSTypes
+  @objc public var tripID: Swift.Int
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class DRSInfoTrip : ObjectiveC.NSObject {
+  @objc public var startLocation: DSFramework.DRSLocation?
+  @objc public var endLocation: DSFramework.DRSLocation?
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class DRSLocation : ObjectiveC.NSObject {
+  public var latitude: Swift.Double?
+  public var longitude: Swift.Double?
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum DRSActivity : Swift.Int {
+  case vehicle = 0
+  case cycling = 1
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension DSFramework.DRSGPSTypes : Swift.Equatable {}
+extension DSFramework.DRSGPSTypes : Swift.Hashable {}
+extension DSFramework.DRSGPSTypes : Swift.RawRepresentable {}
+extension DSFramework.DRSResponseErrors : Swift.Equatable {}
+extension DSFramework.DRSResponseErrors : Swift.Hashable {}
+extension DSFramework.DRSResponseErrors : Swift.RawRepresentable {}
+extension DSFramework.DRSResponse : Swift.Equatable {}
+extension DSFramework.DRSResponse : Swift.Hashable {}
+extension DSFramework.DRSResponse : Swift.RawRepresentable {}
+extension DSFramework.DRSTripStatus : Swift.Equatable {}
+extension DSFramework.DRSTripStatus : Swift.Hashable {}
+extension DSFramework.DRSTripStatus : Swift.RawRepresentable {}
+extension DSFramework.DRSActivity : Swift.Equatable {}
+extension DSFramework.DRSActivity : Swift.Hashable {}
+extension DSFramework.DRSActivity : Swift.RawRepresentable {}
