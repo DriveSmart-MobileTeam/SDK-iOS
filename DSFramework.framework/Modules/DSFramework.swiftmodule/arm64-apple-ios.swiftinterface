@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)
+// swift-compiler-version: Apple Swift version 5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)
 // swift-module-flags: -target arm64-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name DSFramework
+import AVFoundation
 import CoreData
 import CoreFoundation
 import CoreLocation
@@ -36,6 +37,12 @@ public typealias ResultAlias = (Any?, Foundation.NSError?) -> ()
   @objc public static func reStartService()
   @objc public static func isPaused() -> Swift.Bool
   @objc public static func setMotionStart(enabled: Swift.Bool, completion: @escaping DSFramework.ResultAlias)
+  @objc public static func setBluetoothStart(enabled: Swift.Bool)
+  @objc public static func getAllBluetoothDevices() -> [DSFramework.DRSBluetoothDevice]
+  @objc public static func getBluetoothDevices() -> [DSFramework.DRSBluetoothDevice]
+  @objc public static func setBluetoothDevices(devices: [DSFramework.DRSBluetoothDevice])
+  @objc public static func checkAvailableLocation() -> Swift.Bool
+  @objc public static func checkAvailableGPS() -> Swift.Bool
   @objc deinit
   @objc override dynamic public init()
 }
@@ -125,6 +132,13 @@ public typealias ResultAlias = (Any?, Foundation.NSError?) -> ()
   public var rawValue: Swift.Int {
     get
   }
+}
+@objc public class DRSBluetoothDevice : ObjectiveC.NSObject {
+  @objc public var name: Swift.String?
+  @objc public var mac: Swift.String
+  @objc public init(name: Swift.String?, mac: Swift.String)
+  @objc override dynamic public init()
+  @objc deinit
 }
 extension DSFramework.DRSGPSTypes : Swift.Equatable {}
 extension DSFramework.DRSGPSTypes : Swift.Hashable {}
