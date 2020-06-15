@@ -38,7 +38,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		FNUbnUnox1JXtThj4Lba0YoneWg=
+		xAH97TPUYeAifWke7Ca1l+xUn1k=
 		</data>
 		<key>Modules/DSFramework.swiftmodule/arm.swiftdoc</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Modules/DSFramework.swiftmodule/arm.swiftmodule</key>
 		<data>
-		PZxhana6cI9VcpOxxJ25nJ1bw0E=
+		yMQMz18lEpdfg9W5CIQaSEPGL38=
 		</data>
 		<key>Modules/DSFramework.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -62,7 +62,7 @@
 		</data>
 		<key>Modules/DSFramework.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		8S8AuamSZzbFsnU5QEKBz01IHV4=
+		wnWeXZRDlYWc06nOtpQLDhbE27c=
 		</data>
 		<key>Modules/DSFramework.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -74,7 +74,7 @@
 		</data>
 		<key>Modules/DSFramework.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		8S8AuamSZzbFsnU5QEKBz01IHV4=
+		wnWeXZRDlYWc06nOtpQLDhbE27c=
 		</data>
 		<key>Modules/DSFramework.swiftmodule/armv7-apple-ios.swiftdoc</key>
 		<data>
@@ -86,7 +86,7 @@
 		</data>
 		<key>Modules/DSFramework.swiftmodule/armv7-apple-ios.swiftmodule</key>
 		<data>
-		PZxhana6cI9VcpOxxJ25nJ1bw0E=
+		yMQMz18lEpdfg9W5CIQaSEPGL38=
 		</data>
 		<key>Modules/DSFramework.swiftmodule/armv7.swiftdoc</key>
 		<data>
@@ -98,7 +98,7 @@
 		</data>
 		<key>Modules/DSFramework.swiftmodule/armv7.swiftmodule</key>
 		<data>
-		PZxhana6cI9VcpOxxJ25nJ1bw0E=
+		yMQMz18lEpdfg9W5CIQaSEPGL38=
 		</data>
 		<key>Modules/DSFramework.swiftmodule/armv7s-apple-ios.swiftdoc</key>
 		<data>
@@ -110,7 +110,7 @@
 		</data>
 		<key>Modules/DSFramework.swiftmodule/armv7s-apple-ios.swiftmodule</key>
 		<data>
-		d3Wii4qaLkG1wKHndn5TIFvR2gk=
+		Q3sEDuCqVKHR05qcWrE+S2LbUSU=
 		</data>
 		<key>Modules/DSFramework.swiftmodule/armv7s.swiftdoc</key>
 		<data>
@@ -122,7 +122,7 @@
 		</data>
 		<key>Modules/DSFramework.swiftmodule/armv7s.swiftmodule</key>
 		<data>
-		d3Wii4qaLkG1wKHndn5TIFvR2gk=
+		Q3sEDuCqVKHR05qcWrE+S2LbUSU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -253,11 +253,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PZxhana6cI9VcpOxxJ25nJ1bw0E=
+			yMQMz18lEpdfg9W5CIQaSEPGL38=
 			</data>
 			<key>hash2</key>
 			<data>
-			q+AfBpmxdEJE1a1FTi8Rw1UvOp2WgdQMXGWY4MlmPz4=
+			QW07bfnTUSIuWCa6JdqvobljvwWgcb4d09dZCFYYsiA=
 			</data>
 		</dict>
 		<key>Modules/DSFramework.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -286,11 +286,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8S8AuamSZzbFsnU5QEKBz01IHV4=
+			wnWeXZRDlYWc06nOtpQLDhbE27c=
 			</data>
 			<key>hash2</key>
 			<data>
-			guvrAukbTuWn0v7Qq/3ZpVLVl2hCDnKvkj2tGcBEPiE=
+			IPAN/DDG4iL+/p8C3OK9EeJasoWp+scAPOJY4Nl4F4k=
 			</data>
 		</dict>
 		<key>Modules/DSFramework.swiftmodule/arm64.swiftdoc</key>
@@ -319,11 +319,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8S8AuamSZzbFsnU5QEKBz01IHV4=
+			wnWeXZRDlYWc06nOtpQLDhbE27c=
 			</data>
 			<key>hash2</key>
 			<data>
-			guvrAukbTuWn0v7Qq/3ZpVLVl2hCDnKvkj2tGcBEPiE=
+			IPAN/DDG4iL+/p8C3OK9EeJasoWp+scAPOJY4Nl4F4k=
 			</data>
 		</dict>
 		<key>Modules/DSFramework.swiftmodule/armv7-apple-ios.swiftdoc</key>
@@ -352,11 +352,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PZxhana6cI9VcpOxxJ25nJ1bw0E=
+			yMQMz18lEpdfg9W5CIQaSEPGL38=
 			</data>
 			<key>hash2</key>
 			<data>
-			q+AfBpmxdEJE1a1FTi8Rw1UvOp2WgdQMXGWY4MlmPz4=
+			QW07bfnTUSIuWCa6JdqvobljvwWgcb4d09dZCFYYsiA=
 			</data>
 		</dict>
 		<key>Modules/DSFramework.swiftmodule/armv7.swiftdoc</key>
@@ -385,11 +385,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PZxhana6cI9VcpOxxJ25nJ1bw0E=
+			yMQMz18lEpdfg9W5CIQaSEPGL38=
 			</data>
 			<key>hash2</key>
 			<data>
-			q+AfBpmxdEJE1a1FTi8Rw1UvOp2WgdQMXGWY4MlmPz4=
+			QW07bfnTUSIuWCa6JdqvobljvwWgcb4d09dZCFYYsiA=
 			</data>
 		</dict>
 		<key>Modules/DSFramework.swiftmodule/armv7s-apple-ios.swiftdoc</key>
@@ -418,11 +418,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			d3Wii4qaLkG1wKHndn5TIFvR2gk=
+			Q3sEDuCqVKHR05qcWrE+S2LbUSU=
 			</data>
 			<key>hash2</key>
 			<data>
-			BrXUSSW8vt31ZwAlFHxls0lLwfqohthlKSmVFHYeUKo=
+			DOguvMw66hEcaGCxGNjwqMlWpJFPI2jqBmPQJH3W+Q8=
 			</data>
 		</dict>
 		<key>Modules/DSFramework.swiftmodule/armv7s.swiftdoc</key>
@@ -451,11 +451,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			d3Wii4qaLkG1wKHndn5TIFvR2gk=
+			Q3sEDuCqVKHR05qcWrE+S2LbUSU=
 			</data>
 			<key>hash2</key>
 			<data>
-			BrXUSSW8vt31ZwAlFHxls0lLwfqohthlKSmVFHYeUKo=
+			DOguvMw66hEcaGCxGNjwqMlWpJFPI2jqBmPQJH3W+Q8=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
