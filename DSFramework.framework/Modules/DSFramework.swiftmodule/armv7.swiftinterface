@@ -133,6 +133,17 @@ public typealias ResultAlias = (Any?, Foundation.NSError?) -> ()
     get
   }
 }
+extension Bundle {
+  public var appVersionShort: Swift.String? {
+    get
+  }
+  public var appVersionLong: Swift.String? {
+    get
+  }
+  public var appName: Swift.String? {
+    get
+  }
+}
 @objc public class DRSBluetoothDevice : ObjectiveC.NSObject {
   @objc public var name: Swift.String?
   @objc public var mac: Swift.String
