@@ -1,0 +1,11 @@
+framework module DSFramework {
+  umbrella header "DSFramework.h"
+
+  export *
+  module * { export * }
+}
+
+module DSFramework.Swift {
+    header "DSFramework-Swift.h"
+    requires objc
+}

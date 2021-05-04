@@ -1,0 +1,40 @@
+{
+  "BT_ServiceStopTimeOut":660,"Battery":
+{
+  "Critical":
+  {
+    "Frame_Rate":120,"GPSPPS_Rate":15,"Transmit_Rate":0
+  },
+  "Low":
+  {
+    "Frame_Rate":60,"GPSPPS_Rate":1,"Transmit_Rate":240
+  },
+  "Standard":
+  {
+    "Frame_Rate":15,"GPSPPS_Rate":1,"Transmit_Rate":15
+  }
+},
+  "CrashCallNumber":"+34646317063","DS_ServiceIP":"191.235.132.195","DS_ServicePort":35,"Error":
+{
+  "Description":"Operation OK.","ErrorCode":0
+},
+  "GPS_Timeout":60,"GlobalSettingsId":1,"HelpCallNumber":"+34646317063","MaxGPS_Error":101,"MaxGPS_TransmitFrames":50,"PanicCallNumber":"+34646317063","STNumberTransmitFrames":1,"Sensors":
+{
+  "AccelerationVelocity":
+  {
+    "AccelerationThresholdMs2":0.8,"Log":true,"MinSpeedThreshold":4
+  },
+  "DecelerationVelocity":
+  {
+    "AccelerationThresholdMs2":1.4,"Log":true,"MinSpeedThreshold":4},
+  "LateralAcceleration":
+  {
+    "AccelerationThresholdMs2":2,"Log":false,"MinSpeedThreshold":3
+  },
+  "SpeedBumps":
+  {
+    "AccelerationThresholdMs2":2,"Log":false,"MinSpeedThreshold":3
+  }
+},
+  "SmartphoneConfigurationsId":1
+}
