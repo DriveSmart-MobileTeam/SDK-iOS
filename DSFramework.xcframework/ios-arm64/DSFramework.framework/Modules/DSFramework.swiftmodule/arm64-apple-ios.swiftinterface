@@ -19,6 +19,33 @@ extension DLog {
   public func uploadLeftovers()
   public func uploadLogFileWith(tripId: Swift.Int)
 }
+public protocol LogProtocol {
+  var category: Swift.String { get }
+  var scope: DSFramework.LogScope? { get }
+  func log(_ text: Swift.String, type: DSFramework.LogType, category: Swift.String, scope: DSFramework.LogScope?, file: Swift.String, function: Swift.String, line: Swift.UInt) -> Swift.String?
+  func scope(_ text: Swift.String, category: Swift.String, file: Swift.String, function: Swift.String, line: Swift.UInt, closure: ((DSFramework.LogScope) -> Swift.Void)?) -> DSFramework.LogScope
+  func interval(_ name: Swift.StaticString, category: Swift.String, scope: DSFramework.LogScope?, file: Swift.String, function: Swift.String, line: Swift.UInt, closure: (() -> Swift.Void)?) -> DSFramework.LogInterval
+}
+extension LogProtocol {
+  @discardableResult
+  public func trace(_ text: Swift.String? = nil, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line) -> Swift.String?
+  @discardableResult
+  public func info(_ text: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line) -> Swift.String?
+  @discardableResult
+  public func debug(_ text: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line) -> Swift.String?
+  @discardableResult
+  public func error(_ text: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line) -> Swift.String?
+  @discardableResult
+  public func fault(_ text: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line) -> Swift.String?
+  @discardableResult
+  public func assert(_ value: Swift.Bool, _ text: Swift.String = "", file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line) -> Swift.String?
+  @discardableResult
+  public func scope(_ text: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line, closure: ((DSFramework.LogScope) -> Swift.Void)? = nil) -> DSFramework.LogScope
+  @discardableResult
+  public func scope(_ text: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line, closure: @escaping (() -> Swift.Void)) -> DSFramework.LogScope
+  @discardableResult
+  public func interval(_ name: Swift.StaticString, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line, closure: (() -> Swift.Void)? = nil) -> DSFramework.LogInterval
+}
 public typealias ResultAlias = ((Any?, Foundation.NSError?) -> Swift.Void)?
 @objc public protocol DRSAppProtocol {
   @objc func startService(result: Any?, error: Foundation.NSError?)
@@ -54,31 +81,23 @@ public typealias ResultAlias = ((Any?, Foundation.NSError?) -> Swift.Void)?
   @objc override dynamic public init()
   @objc deinit
 }
-public class LogCategory {
-  public var category: Swift.String
-  public var scope: DSFramework.LogScope? {
-    get
-  }
-  public init(log: DSFramework.DLog, category: Swift.String)
+@objc @_hasMissingDesignatedInitializers public class Net : DSFramework.LogOutput {
+  public init(name: Swift.String = "DLog", debug: Swift.Bool = false, source: DSFramework.LogOutput = .textColored)
   @objc deinit
 }
-extension LogCategory : DSFramework.LogProtocol {
-  public func log(_ text: Swift.String, type: DSFramework.LogType, category: Swift.String, scope: DSFramework.LogScope?, file: Swift.String, function: Swift.String, line: Swift.UInt) -> Swift.String?
-  public func scope(_ text: Swift.String, category: Swift.String, file: Swift.String, function: Swift.String, line: Swift.UInt, closure: ((DSFramework.LogScope) -> Swift.Void)?) -> DSFramework.LogScope
-  public func interval(_ name: Swift.StaticString, category: Swift.String, scope: DSFramework.LogScope?, file: Swift.String, function: Swift.String, line: Swift.UInt, closure: (() -> Swift.Void)? = nil) -> DSFramework.LogInterval
+extension Net : Foundation.NetServiceBrowserDelegate {
+  @objc dynamic public func netServiceBrowserWillSearch(_ browser: Foundation.NetServiceBrowser)
+  @objc dynamic public func netServiceBrowserDidStopSearch(_ browser: Foundation.NetServiceBrowser)
+  @objc dynamic public func netServiceBrowser(_ browser: Foundation.NetServiceBrowser, didNotSearch errorDict: [Swift.String : Foundation.NSNumber])
+  @objc dynamic public func netServiceBrowser(_ browser: Foundation.NetServiceBrowser, didFind service: Foundation.NetService, moreComing: Swift.Bool)
+  @objc dynamic public func netServiceBrowser(_ browser: Foundation.NetServiceBrowser, didRemove service: Foundation.NetService, moreComing: Swift.Bool)
 }
-@objc @_hasMissingDesignatedInitializers public class Filter : DSFramework.LogOutput {
+extension Net : Foundation.StreamDelegate {
+  @objc dynamic public func stream(_ aStream: Foundation.Stream, handle eventCode: Foundation.Stream.Event)
+}
+@objc @_hasMissingDesignatedInitializers public class OSLog : DSFramework.LogOutput {
+  public init(subsystem: Swift.String = "com.dlog.logger")
   @objc deinit
-}
-@objc public enum DRSGPSTypes : Swift.Int {
-  case bad = 3
-  case good = 1
-  case regular = 2
-  public init?(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
-    get
-  }
 }
 @objc @_hasMissingDesignatedInitializers public class Standard : DSFramework.LogOutput {
   public enum Stream {
@@ -92,6 +111,16 @@ extension LogCategory : DSFramework.LogProtocol {
   }
   public init(stream: DSFramework.Standard.Stream = .out, source: DSFramework.LogOutput = .textPlain)
   @objc deinit
+}
+@objc public enum DRSGPSTypes : Swift.Int {
+  case bad = 3
+  case good = 1
+  case regular = 2
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
 }
 @objc public enum DRSResponseErrors : Swift.Int {
   case DS_UNHANDLED_ERROR
@@ -118,65 +147,6 @@ extension LogCategory : DSFramework.LogProtocol {
 }
 @objc @_hasMissingDesignatedInitializers public class File : DSFramework.LogOutput {
   public init(path: Swift.String, append: Swift.Bool = false, source: DSFramework.LogOutput = .textPlain)
-  @objc deinit
-}
-@objc public enum DRSResponse : Swift.Int {
-  case RESPONSE_OK
-  case DS_UPLOADING_TRIP
-  case DS_FINISH_UPLOADING_TRIP
-  public init?(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-@objc public enum DSTripStatus : Swift.Int {
-  case none
-  case test
-  case good
-  case bad
-  public init?(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-@_inheritsConvenienceInitializers @objc final public class DSCheckStatus : ObjectiveC.NSObject {
-  @objc final public var serviceTime: Foundation.Date
-  @objc final public var timer: Swift.Double
-  @objc final public var totalDistance: Swift.Double
-  @objc final public var conectivity: Swift.Bool
-  @objc final public var serviceCreated: Swift.Bool
-  @objc final public var tripStatus: DSFramework.DSTripStatus
-  @objc final public var levelGPS: DSFramework.DRSGPSTypes
-  @objc final public var tripID: Swift.Int
-  @objc override dynamic public init()
-  @objc deinit
-}
-@_inheritsConvenienceInitializers @objc public class DRSInfoTrip : ObjectiveC.NSObject {
-  @objc public var startLocation: DSFramework.DRSLocation?
-  @objc public var endLocation: DSFramework.DRSLocation?
-  @objc override dynamic public init()
-  @objc deinit
-}
-@_inheritsConvenienceInitializers @objc public class DRSLocation : ObjectiveC.NSObject {
-  public var latitude: Swift.Double?
-  public var longitude: Swift.Double?
-  @objc override dynamic public init()
-  @objc deinit
-}
-@objc @_hasMissingDesignatedInitializers public class Text : DSFramework.LogOutput {
-  public enum Style {
-    case plain
-    case emoji
-    case colored
-    public static func == (a: DSFramework.Text.Style, b: DSFramework.Text.Style) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
-      get
-    }
-  }
-  public init(style: DSFramework.Text.Style = .plain)
   @objc deinit
 }
 @objc public enum LogType : Swift.Int {
@@ -242,23 +212,94 @@ extension LogScope : DSFramework.LogProtocol {
   @objc override public init(time: Foundation.Date? = super, category: Swift.String, scope: DSFramework.LogScope?, type: DSFramework.LogType, fileName: Swift.String, funcName: Swift.String, line: Swift.UInt, text: Swift.String)
   @objc deinit
 }
-@objc @_hasMissingDesignatedInitializers public class Net : DSFramework.LogOutput {
-  public init(name: Swift.String = "DLog", debug: Swift.Bool = false, source: DSFramework.LogOutput = .textColored)
+public class DLog {
+  public static let disabled: DSFramework.DLog
+  public var category: Swift.String
+  public var scope: DSFramework.LogScope? {
+    get
+  }
+  public subscript(category: Swift.String) -> DSFramework.LogCategory {
+    get
+  }
+  public init(_ output: DSFramework.LogOutput? = .stdout)
   @objc deinit
 }
-extension Net : Foundation.NetServiceBrowserDelegate {
-  @objc dynamic public func netServiceBrowserWillSearch(_ browser: Foundation.NetServiceBrowser)
-  @objc dynamic public func netServiceBrowserDidStopSearch(_ browser: Foundation.NetServiceBrowser)
-  @objc dynamic public func netServiceBrowser(_ browser: Foundation.NetServiceBrowser, didNotSearch errorDict: [Swift.String : Foundation.NSNumber])
-  @objc dynamic public func netServiceBrowser(_ browser: Foundation.NetServiceBrowser, didFind service: Foundation.NetService, moreComing: Swift.Bool)
-  @objc dynamic public func netServiceBrowser(_ browser: Foundation.NetServiceBrowser, didRemove service: Foundation.NetService, moreComing: Swift.Bool)
+extension DLog : DSFramework.LogProtocol {
+  public func log(_ text: Swift.String, type: DSFramework.LogType, category: Swift.String, scope: DSFramework.LogScope?, file: Swift.String, function: Swift.String, line: Swift.UInt) -> Swift.String?
+  public func scope(_ text: Swift.String, category: Swift.String, file: Swift.String, function: Swift.String, line: Swift.UInt, closure: ((DSFramework.LogScope) -> Swift.Void)?) -> DSFramework.LogScope
+  public func interval(_ name: Swift.StaticString, category: Swift.String, scope: DSFramework.LogScope?, file: Swift.String, function: Swift.String, line: Swift.UInt, closure: (() -> Swift.Void)?) -> DSFramework.LogInterval
 }
-extension Net : Foundation.StreamDelegate {
-  @objc dynamic public func stream(_ aStream: Foundation.Stream, handle eventCode: Foundation.Stream.Event)
+@objc public enum DRSResponse : Swift.Int {
+  case RESPONSE_OK
+  case DS_UPLOADING_TRIP
+  case DS_FINISH_UPLOADING_TRIP
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
 }
-@objc @_hasMissingDesignatedInitializers public class OSLog : DSFramework.LogOutput {
-  public init(subsystem: Swift.String = "com.dlog.logger")
+@objc @_hasMissingDesignatedInitializers public class Text : DSFramework.LogOutput {
+  public enum Style {
+    case plain
+    case emoji
+    case colored
+    public static func == (a: DSFramework.Text.Style, b: DSFramework.Text.Style) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public init(style: DSFramework.Text.Style = .plain)
   @objc deinit
+}
+@objc public enum DSTripStatus : Swift.Int {
+  case none
+  case test
+  case good
+  case bad
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @objc final public class DSCheckStatus : ObjectiveC.NSObject {
+  @objc final public var serviceTime: Foundation.Date
+  @objc final public var timer: Swift.Double
+  @objc final public var totalDistance: Swift.Double
+  @objc final public var conectivity: Swift.Bool
+  @objc final public var serviceCreated: Swift.Bool
+  @objc final public var tripStatus: DSFramework.DSTripStatus
+  @objc final public var levelGPS: DSFramework.DRSGPSTypes
+  @objc final public var tripID: Swift.Int
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class DRSInfoTrip : ObjectiveC.NSObject {
+  @objc public var startLocation: DSFramework.DRSLocation?
+  @objc public var endLocation: DSFramework.DRSLocation?
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class DRSLocation : ObjectiveC.NSObject {
+  public var latitude: Swift.Double?
+  public var longitude: Swift.Double?
+  @objc override dynamic public init()
+  @objc deinit
+}
+public class LogCategory {
+  public var category: Swift.String
+  public var scope: DSFramework.LogScope? {
+    get
+  }
+  public init(log: DSFramework.DLog, category: Swift.String)
+  @objc deinit
+}
+extension LogCategory : DSFramework.LogProtocol {
+  public func log(_ text: Swift.String, type: DSFramework.LogType, category: Swift.String, scope: DSFramework.LogScope?, file: Swift.String, function: Swift.String, line: Swift.UInt) -> Swift.String?
+  public func scope(_ text: Swift.String, category: Swift.String, file: Swift.String, function: Swift.String, line: Swift.UInt, closure: ((DSFramework.LogScope) -> Swift.Void)?) -> DSFramework.LogScope
+  public func interval(_ name: Swift.StaticString, category: Swift.String, scope: DSFramework.LogScope?, file: Swift.String, function: Swift.String, line: Swift.UInt, closure: (() -> Swift.Void)? = nil) -> DSFramework.LogInterval
 }
 @objc @_hasMissingDesignatedInitializers public class LogOutput : ObjectiveC.NSObject {
   public static var textPlain: DSFramework.Text {
@@ -297,49 +338,8 @@ infix operator => : ForwardPipe
 extension LogOutput {
   public static func => (left: DSFramework.LogOutput, right: DSFramework.LogOutput) -> DSFramework.LogOutput
 }
-public class DLog {
-  public static let disabled: DSFramework.DLog
-  public var category: Swift.String
-  public var scope: DSFramework.LogScope? {
-    get
-  }
-  public subscript(category: Swift.String) -> DSFramework.LogCategory {
-    get
-  }
-  public init(_ output: DSFramework.LogOutput? = .stdout)
+@objc @_hasMissingDesignatedInitializers public class Filter : DSFramework.LogOutput {
   @objc deinit
-}
-extension DLog : DSFramework.LogProtocol {
-  public func log(_ text: Swift.String, type: DSFramework.LogType, category: Swift.String, scope: DSFramework.LogScope?, file: Swift.String, function: Swift.String, line: Swift.UInt) -> Swift.String?
-  public func scope(_ text: Swift.String, category: Swift.String, file: Swift.String, function: Swift.String, line: Swift.UInt, closure: ((DSFramework.LogScope) -> Swift.Void)?) -> DSFramework.LogScope
-  public func interval(_ name: Swift.StaticString, category: Swift.String, scope: DSFramework.LogScope?, file: Swift.String, function: Swift.String, line: Swift.UInt, closure: (() -> Swift.Void)?) -> DSFramework.LogInterval
-}
-public protocol LogProtocol {
-  var category: Swift.String { get }
-  var scope: DSFramework.LogScope? { get }
-  func log(_ text: Swift.String, type: DSFramework.LogType, category: Swift.String, scope: DSFramework.LogScope?, file: Swift.String, function: Swift.String, line: Swift.UInt) -> Swift.String?
-  func scope(_ text: Swift.String, category: Swift.String, file: Swift.String, function: Swift.String, line: Swift.UInt, closure: ((DSFramework.LogScope) -> Swift.Void)?) -> DSFramework.LogScope
-  func interval(_ name: Swift.StaticString, category: Swift.String, scope: DSFramework.LogScope?, file: Swift.String, function: Swift.String, line: Swift.UInt, closure: (() -> Swift.Void)?) -> DSFramework.LogInterval
-}
-extension LogProtocol {
-  @discardableResult
-  public func trace(_ text: Swift.String? = nil, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line) -> Swift.String?
-  @discardableResult
-  public func info(_ text: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line) -> Swift.String?
-  @discardableResult
-  public func debug(_ text: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line) -> Swift.String?
-  @discardableResult
-  public func error(_ text: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line) -> Swift.String?
-  @discardableResult
-  public func fault(_ text: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line) -> Swift.String?
-  @discardableResult
-  public func assert(_ value: Swift.Bool, _ text: Swift.String = "", file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line) -> Swift.String?
-  @discardableResult
-  public func scope(_ text: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line, closure: ((DSFramework.LogScope) -> Swift.Void)? = nil) -> DSFramework.LogScope
-  @discardableResult
-  public func scope(_ text: Swift.String, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line, closure: @escaping (() -> Swift.Void)) -> DSFramework.LogScope
-  @discardableResult
-  public func interval(_ name: Swift.StaticString, file: Swift.String = #file, function: Swift.String = #function, line: Swift.UInt = #line, closure: (() -> Swift.Void)? = nil) -> DSFramework.LogInterval
 }
 @objc public enum DRSActivity : Swift.Int {
   case vehicle = 0
@@ -368,25 +368,25 @@ extension Bundle {
   @objc override dynamic public init()
   @objc deinit
 }
+extension DSFramework.Standard.Stream : Swift.Equatable {}
+extension DSFramework.Standard.Stream : Swift.Hashable {}
 extension DSFramework.DRSGPSTypes : Swift.Equatable {}
 extension DSFramework.DRSGPSTypes : Swift.Hashable {}
 extension DSFramework.DRSGPSTypes : Swift.RawRepresentable {}
-extension DSFramework.Standard.Stream : Swift.Equatable {}
-extension DSFramework.Standard.Stream : Swift.Hashable {}
 extension DSFramework.DRSResponseErrors : Swift.Equatable {}
 extension DSFramework.DRSResponseErrors : Swift.Hashable {}
 extension DSFramework.DRSResponseErrors : Swift.RawRepresentable {}
-extension DSFramework.DRSResponse : Swift.Equatable {}
-extension DSFramework.DRSResponse : Swift.Hashable {}
-extension DSFramework.DRSResponse : Swift.RawRepresentable {}
-extension DSFramework.DSTripStatus : Swift.Equatable {}
-extension DSFramework.DSTripStatus : Swift.Hashable {}
-extension DSFramework.DSTripStatus : Swift.RawRepresentable {}
-extension DSFramework.Text.Style : Swift.Equatable {}
-extension DSFramework.Text.Style : Swift.Hashable {}
 extension DSFramework.LogType : Swift.Equatable {}
 extension DSFramework.LogType : Swift.Hashable {}
 extension DSFramework.LogType : Swift.RawRepresentable {}
+extension DSFramework.DRSResponse : Swift.Equatable {}
+extension DSFramework.DRSResponse : Swift.Hashable {}
+extension DSFramework.DRSResponse : Swift.RawRepresentable {}
+extension DSFramework.Text.Style : Swift.Equatable {}
+extension DSFramework.Text.Style : Swift.Hashable {}
+extension DSFramework.DSTripStatus : Swift.Equatable {}
+extension DSFramework.DSTripStatus : Swift.Hashable {}
+extension DSFramework.DSTripStatus : Swift.RawRepresentable {}
 extension DSFramework.DRSActivity : Swift.Equatable {}
 extension DSFramework.DRSActivity : Swift.Hashable {}
 extension DSFramework.DRSActivity : Swift.RawRepresentable {}
