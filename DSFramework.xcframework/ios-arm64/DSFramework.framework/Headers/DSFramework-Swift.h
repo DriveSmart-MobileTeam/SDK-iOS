@@ -208,6 +208,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+
 typedef SWIFT_ENUM(NSInteger, DRSActivity, open) {
   DRSActivityVehicle = 0,
   DRSActivityCycling = 1,
@@ -332,6 +333,7 @@ SWIFT_CLASS("_TtC11DSFramework13DSCheckStatus")
 @property (nonatomic) NSInteger tripID;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 typedef SWIFT_ENUM(NSInteger, DSTripStatus, open) {
   DSTripStatusNone = 0,
